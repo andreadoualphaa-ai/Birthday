@@ -1,0 +1,286 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: radial-gradient(
+        circle at 50% 35%,
+        #302a27 0%,
+        #181619 48%,
+        #09090c 100%
+    );
+    color: #f3e9d6;
+    font-family: Georgia, "Times New Roman", serif;
+    text-align: center;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+.birthday-container {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 720px);
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 45px 16px 65px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.small-title {
+    color: #c7a56a;
+    font-size: 12px;
+    letter-spacing: 5px;
+}
+
+h1 {
+    color: #e7c681;
+    font-size: clamp(30px, 7vw, 56px);
+    font-weight: normal;
+    line-height: 1.15;
+    margin: 16px 0;
+}
+
+.subtitle {
+    color: #e3d5bd;
+    font-size: clamp(15px, 4vw, 19px);
+    font-style: italic;
+    line-height: 1.6;
+}
+
+/* CAKE AREA */
+
+#cakeArea {
+    width: 100%;
+    min-height: 340px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-top: 110px;
+    padding-bottom: 20px;
+}
+
+.cake {
+    position: relative;
+    width: min(310px, 85vw);
+    height: 155px;
+    border-radius: 15px 15px 26px 26px;
+    background: repeating-linear-gradient(
+        to bottom,
+        #3c3031 0px,
+        #3c3031 43px,
+        #a88550 43px,
+        #e0bc78 49px,
+        #3c3031 55px
+    );
+    border: 2px solid #b39159;
+    box-shadow:
+        0 10px 0 #171315,
+        0 13px 20px #0008,
+        0 0 30px #b3915920;
+}
+
+.cake::before {
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: -20px;
+    width: calc(100% + 4px);
+    height: 42px;
+    border-radius: 50%;
+    background: #d3b17c;
+    border: 2px solid #f0d29a;
+    z-index: 1;
+}
+
+.cake::after {
+    content: "";
+    position: absolute;
+    left: -15px;
+    bottom: -19px;
+    width: calc(100% + 30px);
+    height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(
+        to bottom,
+        #e4ca94,
+        #99733e
+    );
+    z-index: -1;
+}
+
+/* CANDLES */
+
+.candles {
+    position: absolute;
+    left: 8%;
+    bottom: 138px;
+    width: 84%;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    justify-items: center;
+    align-items: end;
+    column-gap: 2px;
+    row-gap: 13px;
+    z-index: 3;
+}
+
+.candle {
+    position: relative;
+    width: 10px;
+    height: 42px;
+    border: none;
+    padding: 0;
+    border-radius: 3px;
+    background: repeating-linear-gradient(
+        35deg,
+        #e5c886 0px,
+        #e5c886 6px,
+        #6c4b2b 6px,
+        #6c4b2b 10px
+    );
+    cursor: pointer;
+    box-shadow: 1px 0 3px #0005;
+}
+
+.candle:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 5px;
+}
+
+.flame {
+    position: absolute;
+    left: 50%;
+    bottom: 46px;
+    width: 14px;
+    height: 22px;
+    transform: translateX(-50%);
+    transform-origin: bottom center;
+    border-radius: 70% 20% 65% 40%;
+    background: #fff0a0;
+    box-shadow:
+        0 0 12px #ffbd49,
+        0 0 23px #ffa621;
+    animation: flicker 0.6s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes flicker {
+    from {
+        transform: translateX(-50%) rotate(-8deg) scale(0.9);
+    }
+    to {
+        transform: translateX(-50%) rotate(8deg) scale(1.1);
+    }
+}
+
+.candle.out .flame {
+    display: none;
+}
+
+.candle.out {
+    opacity: 0.65;
+    cursor: default;
+}
+
+/* BUTTONS */
+
+#instructions {
+    margin: 24px 0 16px;
+    color: #e3d5bd;
+    font-size: 15px;
+}
+
+button {
+    font-family: inherit;
+}
+
+#microphoneButton,
+#replayButton {
+    padding: 14px 22px;
+    border: 1px solid #d0af72;
+    border-radius: 30px;
+    color: #e9d09a;
+    background: #282024;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+#microphoneButton:hover,
+#replayButton:hover {
+    background: #4b3931;
+    transform: scale(1.04);
+}
+
+#microphoneButton:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+/* BIRTHDAY MESSAGE */
+
+#birthdayMessage {
+    margin: 28px 0;
+    color: #f5d58b;
+    font-size: clamp(25px, 6vw, 42px);
+    font-weight: normal;
+    text-shadow: 0 0 24px #d4a75288;
+    animation: messageAppear 1s ease-out;
+}
+
+@keyframes messageAppear {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* FIREWORKS AND CONFETTI */
+
+#effects {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+@media (max-width: 480px) {
+    .birthday-container {
+        padding-top: 32px;
+    }
+
+    .small-title {
+        letter-spacing: 3px;
+    }
+
+    #cakeArea {
+        min-height: 310px;
+    }
+
+    .candles {
+        row-gap: 10px;
+    }
+
+    .candle {
+        width: 8px;
+        height: 37px;
+    }
+
+    .flame {
+        bottom: 41px;
+    }
+}
